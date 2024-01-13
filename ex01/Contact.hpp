@@ -13,7 +13,6 @@ class Contact
 		void	set_contact(std::string first_name, std::string last_name, std::string nickname, std::string phone_number, std::string	darkest_secret);
 		int		is_empty(void);
 		void	display_contact_list(int index);
-		void	adjust_to_right_align(std::string str);
 		void	display_contact_info(void);
 	private:
 		std::string	first_name;
@@ -21,6 +20,7 @@ class Contact
 		std::string	nickname;
 		std::string	phone_number;
 		std::string	darkest_secret;
+		void	adjust_to_right_align(std::string str);
 };
 
 #endif

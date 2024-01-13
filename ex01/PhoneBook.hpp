@@ -15,12 +15,12 @@ class PhoneBook
 		PhoneBook(void);
 		~PhoneBook(void);
 		void	add_contact(void);
-		int		check_input_error(std::string input, int type);
 		void	search_contact(void);
-		int		check_index_existence(std::string idx);
 	private:
 		Contact	contacts[8];
 		int			index;
+		int		check_input_error(std::string input, int type);
+		int		check_index_existence(std::string idx);
 };
 
 #endif

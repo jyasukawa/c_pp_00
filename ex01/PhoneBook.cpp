@@ -17,7 +17,6 @@ void	PhoneBook::add_contact(void)
 	std::string	phone_number;
 	std::string	darkest_secret;
 
-	// std::getline(std::cin, first_name);
 	std::cout << "first name: ";
 	std::getline(std::cin, first_name);
 	if (this->check_input_error(first_name, FIRST_NAME) == -1)
@@ -48,13 +47,18 @@ int	PhoneBook::check_input_error(std::string input, int type)
 {
 	size_t	i;
 
+	if (std::cin.eof())
+	{
+		std::cout << "\nError: Ctrl+D detected. exit\n";
+		return (-1);
+	}
 	if (input.empty() == true)
 	{
 		std::cout << "Error: The input was empty.\n";
 		return (-1);
 	}
 	i = 0;
-	while (input[i] != '\0')
+	while (i < input.size())
 	{
 		if ((type == FIRST_NAME || type == LAST_NAME) && (std::isalpha(input[i]) == 0))
 		{
@@ -71,6 +75,7 @@ int	PhoneBook::check_input_error(std::string input, int type)
 			std::cout << "Error: The input is invalid.\n";
 			return (-1);
 		}
+		i++;
 	}
 	return (0);
 }
@@ -86,13 +91,14 @@ void	PhoneBook::search_contact(void)
 		return ;
 	}
 	i = 0;
-	while (i < 8 && this->contacts[i].is_empty() != 0)
+	while (i < 8 && this->contacts[i].is_empty() == 0)
 	{
 		this->contacts[i].display_contact_list(i);
 		i++;
 	}
 	std::cout << "Please select an index for more details.\n";
 	std::cin >> idx;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	if (this->check_index_existence(idx) == -1)
 	{
 		std::cout << "Error: There is no matching information.\n";
